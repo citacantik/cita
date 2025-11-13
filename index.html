@@ -3,106 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun! 🎉</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <title>🎀 Happy Birthday! 🎀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <div class="app-container">
-        <header class="text-center p-3">
-            <h1 class="header-title">Happy Birthday!</h1>
-        </header>
+        :root {
+            --pink-primary: #FFB6C1;
+            --pink-secondary: #FFC0CB;
+            --pink-dark: #FF69B4;
+            --pink-light: #FFE4E1;
+            --pink-pastel: #FFD1DC;
+            --white: #FFFFFF;
+            --purple: #DDA0DD;
+        }
 
-        <main class="content-body text-center p-4">
-            <div class="card birthday-card shadow-lg mb-4">
-                <div class="card-body p-4">
-                    <p class="greeting-text">Untuk [Nama yang Berulang Tahun],</p>
-                    <h2 class="display-4 mb-3 name-highlight">[Nama]</h2>
-                    <p class="message-body">Semoga di hari spesial ini, semua impianmu tercapai dan kamu selalu dilimpahi kebahagiaan. 🎉</p>
-                    <div class="mt-4">
-                        <button class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#photoModal">Lihat Galeri Foto 📸</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="countdown-box p-3 mb-4 rounded shadow-sm">
-                <p class="mb-0">Hari Spesial Tinggal:</p>
-                <div id="countdown" class="h3 fw-bold">...</div>
-            </div>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6C1 50%, #FFC0CB 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-            <div class="messages-section mt-5">
-                <h3 class="section-title">Ucapan Terbaik!</h3>
-                <div class="message-bubble sender-a">
-                    "Semoga sukses selalu!" - Teman A
-                </div>
-                <div class="message-bubble sender-b">
-                    "Doa terbaik dari keluarga!" - Keluarga B
-                </div>
-            </div>
-        </main>
+        /* Animated Background */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-        <footer class="text-center p-2">
-            <p class="footer-text">&copy; 2025 Created with Love ❤️</p>
-        </footer>
-    </div>
-    
-    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content gradient-bg-modal">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="photoModalLabel">✨ Galeri Kenangan ✨</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                 
-                                <img src="gambar-1.jpg" class="d-block w-100 rounded" alt="Foto Kenangan 1">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="gambar-2.jpg" class="d-block w-100 rounded" alt="Foto Kenangan 2">
-                            </div>
-                            </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 15s infinite;
+            opacity: 0.3;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // JAVASCRIPT SEDERHANA UNTUK HITUNG MUNDUR (Opsional)
-        // Atur tanggal ulang tahun target
-        const targetDate = new Date("November 20, 2025 00:00:00").getTime();
-
-        const countdownFunction = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML = days + "H " + hours + "J "
-            + minutes + "M " + seconds + "D ";
-
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                document.getElementById("countdown").innerHTML = "SELAMAT ULANG TAHUN!";
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
             }
-        }, 1000);
-    </script>
-</body>
-</html>
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-title {
+            font-size: 4em;
+            color: var(--pink-dark);
+            text-shadow: 3px 3px 6px rgba(255, 105, 180, 0.3);
+            animation: bounce 2s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: var(--purple);
+            font-style: italic;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(255, 105, 180
