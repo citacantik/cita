@@ -3,108 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎀 Happy Birthday! 🎀</title>
+    <title>🎉 Happy Birthday! 🎂</    <title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --pink-primary: #ff69b4;
+            --pink-secondary: #ffb6c1;
+            --pink-light: #ffe0ec;
+            --pink-dark: #ff1493;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --pink-primary: #FFB6C1;
-            --pink-secondary: #FFC0CB;
-            --pink-dark: #FF69B4;
-            --pink-light: #FFE4E1;
-            --pink-pastel: #FFD1DC;
-            --white: #FFFFFF;
-            --purple: #DDA0DD;
-        }
-
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6C1 50%, #FFC0CB 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        .mobile-container {
+            max-width: 428px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
             position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
         }
 
-        /* Animated Background */
-        .floating-hearts {
+        .gradient-pink {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .confetti {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            width: 10px;
+            height: 10px;
+            background: var(--pink-primary);
+            animation: confetti-fall 3s linear infinite;
         }
 
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            animation: float 15s infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes float {
+        @keyframes confetti-fall {
             0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
             }
         }
 
-        /* Header */
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 10;
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        .main-title {
-            font-size: 4em;
-            color: var(--pink-dark);
-            text-shadow: 3px 3px 6px rgba(255, 105, 180, 0.3);
-            animation: bounce 2s ease-in-out infinite;
-            margin-bottom: 20px;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        @keyframes bounce {
-            0%, 100% {
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
                 transform: translateY(0);
+                opacity: 1;
             }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .subtitle {
-            font-size: 1.5em;
-            color: var(--purple);
-            font-style: italic;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            position: relative;
-            z-index: 10;
         }
 
         .birthday-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(255, 105, 180
+            background: linear-gradient(135deg, #ffe0ec, #ffb6c1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .birthday-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-frame {
+            border: 5px solid white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05);
+        }
+
+        .wish-bubble {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            margin: 10px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .wish-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            transform: rotate(45deg);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 428px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #9ca3af;
+        }
+
+        .nav-item.active {
+            color: var(--pink-primary);
+        }
+
+        .nav-item:hover {
+            background: var(--pink-light);
+        }
+
+        .page {
+            display: none;
+            padding-bottom: 80px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cake-animation {
+            font-size: 80px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .sparkle {
+            position: absolute;
+            animation: sparkle 2s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .countdown-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.2);
+        }
+
+        .gift-box {
+            width: 100px;
+            height: 100px;
+            background: var(--pink-primary);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 20px auto;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--pink-dark);
+            transform: translateY(-50%);
+        }
+
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 10px;
+            background: var(--pink-dark);
+            transform: translateX(-50%);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 350px;
+            width: 90%;
+            animation: slideUp 0.3s ease;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            33% { transform: translateY(-20px) rotate(5deg); }
+            66% { transform: translateY(-10px) rotate(-3deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header -->
+        <header class="gradient-pink text-white p-6 relative overflow-hidden">
+            <div class="sparkle" style="top: 20px; left: 20px;">✨</div>
+            <div class="sparkle" style="top: 50px; right: 30px; animation-delay: 0.5s;">✨</div>
+            <div class="sparkle" style="bottom: 20px; left: 50px; animation-delay: 1s;">✨</div>
+            
+            <h1 class="text-3xl font-bold text-center floating">
+                🎉 Selamat Ulang Tahun! 🎂
+            </h1>
+            <p class="text-center mt-2 text-pink-100">Semoga harimu menyenangkan!</p>
+        </header>
+
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="p-4">
+                <!-- Birthday Cake Animation -->
+                <div class="text-center mt-8 mb-8">
+                    <div class="cake-animation">🎂</div>
+                    <h2 class="text-2xl font-bold text-pink-600 mt-4"
